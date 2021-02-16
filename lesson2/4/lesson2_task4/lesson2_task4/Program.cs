@@ -11,33 +11,22 @@ namespace lesson2_task4
         static void Main(string[] args)
         {
 
-            //5.  (*) Если пользователь указал месяц из зимнего периода, а средняя температура > 0, вывести сообщение «Дождливая зима».
+            //4. Для полного закрепления понимания простых типов найдите любой чек, либо фотографию этого чека в интернете и схематично нарисуйте его в консоли, только за место динамических, по вашему мнению, данных(это может быть дата, название магазина, сумма покупок) подставляйте переменные, которые были заранее заготовлены до вывода на консоль.
 
+            string name = "Магазин SOLOMON";
+            string inn = "133213568354";
+            string title1 = "Фарш";
+            double price1 = 170.50;
+            double count1 = 1.275;
+            decimal total1 = (decimal)price1 * (decimal)count1;
 
-            Console.Write("Введите порядковый номер текущего месяца: ");
-            int monthInput = Convert.ToInt32(Console.ReadLine());
-            if (monthInput == 1 || monthInput == 2 || monthInput == 12)
-            {
+            Console.WriteLine($"МЕСТО РАСЧЕТОВ {name}");
+            Console.WriteLine($"ИНН {inn}");
+            Console.WriteLine($"");
+            Console.WriteLine("КАССОВЫЙ ЧЕК");
+            Console.WriteLine($"{title1}");
+            Console.WriteLine($"{price1} х {count1} = {total1}");
 
-                Console.Write("Введите минимальную температуру за сутки: ");
-                string minTemp = Console.ReadLine();
-
-                Console.Write("Введите максимальную температуру за сутки: ");
-                string maxTemp = Console.ReadLine();
-
-                if (Double.TryParse(minTemp.Replace('.', ','), out Double min) && Double.TryParse(maxTemp.Replace('.', ','), out Double max))
-                {
-                    Double midTemp = (min + max) / 2;
-                    if (midTemp > 0)
-                    {
-                        Console.WriteLine("Дождливая зима");
-                    }
-                }
-                else
-                {
-                    Console.Write("Не удалось обработать входные данные ");
-                }
-            }
         }
     }
 }
