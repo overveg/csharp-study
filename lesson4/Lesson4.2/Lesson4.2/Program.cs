@@ -12,14 +12,14 @@ namespace Lesson4._2
         {
             //2.Написать программу, принимающую на вход строку — набор чисел, разделенных пробелом, и возвращающую число — сумму всех чисел в строке. Ввести данные с клавиатуры и вывести результат на экран.
             Console.WriteLine("Введите набор чисел, разделенных пробелом:");
-            string userInput = Console.ReadLine();
-            string[] userArray = userInput.Split(' ');
+          
+            string[] userInput = (Console.ReadLine()).Split(' ');
 
             int result = 0;
 
-            for (int j = 0; j < userArray.Length; j++)
+            for (int j = 0; j < userInput.Length; j++)
             {
-                bool isInteger = Int32.TryParse(userArray[j], out int number);
+                bool isInteger = Int32.TryParse(userInput[j], out int number);
                 if (isInteger)
                 {
                     result += Convert.ToInt32(number);
