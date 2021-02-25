@@ -14,18 +14,20 @@ namespace Lesson4._2
             Console.WriteLine("Введите набор чисел, разделенных пробелом:");
           
             string[] userInput = (Console.ReadLine()).Split(' ');
-
+           
+            Console.WriteLine(GetSum(userInput));
+        }
+        static int GetSum(params string[] arr) {
             int result = 0;
-
-            for (int j = 0; j < userInput.Length; j++)
+            for (int j = 0; j < arr.Length; j++)
             {
-                bool isInteger = Int32.TryParse(userInput[j], out int number);
+                bool isInteger = Int32.TryParse(arr[j], out int number);
                 if (isInteger)
                 {
                     result += Convert.ToInt32(number);
                 }
             }
-            Console.WriteLine(result);
+            return result;
         }
     }
 }
