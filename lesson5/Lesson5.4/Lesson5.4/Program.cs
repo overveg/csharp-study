@@ -12,28 +12,51 @@ namespace Lesson5._4
 
             //с рекурсией
             Console.WriteLine("с рекурсией");
-            GetCatalog(entries.Length - 1, entries);
-            Console.WriteLine("");
+            GetCatalog(0, entries);
+            
+            
 
             //без рекурсии
             Console.WriteLine("без рекурсии");
             for (int i = 0; i < entries.Length; i++)
             {
-                Console.Write($">{new DirectoryInfo(entries[i]).Name}");
+                Console.WriteLine($">{new DirectoryInfo(entries[i]).Name}");
             }
             Console.WriteLine("");
+            Console.WriteLine("");
+
+
+            Console.WriteLine("с рекурсией с конца строки");
+            GetCatalogAlter(entries.Length - 1, entries);
         }
 
-        static string GetCatalog(int index, string[] array)
+       
+        static string GetCatalog( int index, string[] array)
+        {
+            //с начала строки
+            if (index < array.Length)
+            {
+                Console.WriteLine($">{new DirectoryInfo(array[index]).Name}");
+                return GetCatalog(index + 1, array);
+            }
+            Console.WriteLine("");
+            Console.WriteLine("");
+
+            return "";
+        }
+        static string GetCatalogAlter(int index, string[] array)
         {
             //с конца строки
             if (index >= 0)
             {
-                Console.Write($"{new DirectoryInfo(array[index]).Name}>");
-                return GetCatalog(index - 1, array);
+                Console.WriteLine($"{new DirectoryInfo(array[index]).Name}>");
+                return GetCatalogAlter(index - 1, array);
             }
+            Console.WriteLine("");
+            Console.WriteLine("");
 
             return "";
         }
+
     }
 }
