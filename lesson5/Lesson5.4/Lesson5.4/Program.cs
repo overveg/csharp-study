@@ -9,11 +9,10 @@ namespace Lesson5._4
         {
             string workDir = @"d:\Projects\viktoria\test\";
             string[] entries = Directory.GetFileSystemEntries(workDir, "*", SearchOption.AllDirectories);
-            int entriesLength = entries.Length - 1;
 
             //с рекурсией
             Console.WriteLine("с рекурсией");
-            GetCatalog(entriesLength, entries);
+            GetCatalog(entries.Length - 1, entries);
             Console.WriteLine("");
 
             //без рекурсии
