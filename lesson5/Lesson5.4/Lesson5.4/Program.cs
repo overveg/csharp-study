@@ -14,7 +14,6 @@ namespace Lesson5._4
             Console.WriteLine("с рекурсией");
             GetCatalog(0, entries);
             
-            
 
             //без рекурсии
             Console.WriteLine("без рекурсии");
@@ -26,6 +25,7 @@ namespace Lesson5._4
             Console.WriteLine("");
 
 
+            //с рекурсией с конца строки
             Console.WriteLine("с рекурсией с конца строки");
             GetCatalogAlter(entries.Length - 1, entries);
         }
