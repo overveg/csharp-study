@@ -4,15 +4,6 @@ using System.Collections;
 
 namespace Lesson6._1
 {
-    //метод для сортировки массива
-    public class ReverseComparer : IComparer
-    {
-        // Call CaseInsensitiveComparer.Compare with the parameters reversed.
-        public int Compare(Object x, Object y)
-        {
-            return (new CaseInsensitiveComparer()).Compare(y, x);
-        }
-    }
 
     class Program
     {
@@ -49,7 +40,7 @@ namespace Lesson6._1
         }
 
         //выводит в консоль элементы массива
-        public static void DisplayValues(String[] arr)
+        public static void DisplayValues(string[] arr)
         {
             for (int i = arr.GetLowerBound(0); i <= arr.GetUpperBound(0); i++)
             {
