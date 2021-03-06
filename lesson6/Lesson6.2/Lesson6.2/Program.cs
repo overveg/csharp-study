@@ -29,29 +29,35 @@ namespace Lesson6._2
             //проверяем есть ли файл tasks.json
             if (File.Exists(Path.Combine(workDir, "tasks.json")))
             {
+                //выводим список задач
                 ShowTasks();
 
+                //добавляем новую задачу
+                Console.WriteLine("Введите название новой задачи:");
+                ToDo task = new ToDo(Console.ReadLine(), false);
+                AddTask(task);
 
+                //выводим список задач
+                ShowTasks();
+
+                //отмечаем выполненные задачи
                 Console.WriteLine("Отметьте выполненные задачи - укажите номер:");
                 int userTaskId = Convert.ToInt32(Console.ReadLine());
-
                 CheckTaskDone(userTaskId);
 
+                //выводим список задач
                 ShowTasks();
             }
-
         }
 
         /// <summary>
-        /// Выводит в консоль список задач
+        /// Десериализует список задач из файла
         /// </summary>
         static ToDo[] ReadTasks()
         {
-
             string jsonTodo = File.ReadAllText("tasks.json");
             ToDo[] tasksArray = JsonSerializer.Deserialize<ToDo[]>(jsonTodo);
             return tasksArray;
-
         }
 
 
@@ -60,7 +66,6 @@ namespace Lesson6._2
         /// </summary>
         static void ShowTasks()
         {
-
             ToDo[] tasksArray = ReadTasks();
 
             int index = 1;
@@ -101,6 +106,20 @@ namespace Lesson6._2
             };
             string json = JsonSerializer.Serialize(tasksArray, options);
             File.WriteAllText("tasks.json", json);
+        }
+
+        static void AddTask(ToDo task) {
+            ToDo[] OldTasks = ReadTasks();
+            int OldTasksLen = OldTasks.Length;
+            ToDo[] NewTasks = new ToDo[OldTasksLen+1];
+
+            int index = 0;
+            foreach (var item in OldTasks) {
+                NewTasks[index] = OldTasks[index];
+                index++;
+            }
+            NewTasks[index] = task;
+            SaveTasks(NewTasks);
         }
 
     }

@@ -19,9 +19,14 @@ namespace Lesson6._2
         {
 
         }
-        public ToDo(string title)
+        public ToDo(string title, bool isDone)
         {
             Title = title;
+            IsDone = isDone;
+        }
+
+        public void Add(string title) { 
+            
         }
     }
 }
