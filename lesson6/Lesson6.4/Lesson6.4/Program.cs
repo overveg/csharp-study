@@ -24,7 +24,22 @@ namespace Lesson6._4
 
             С помощью цикла вывести информацию только о сотрудниках старше 40 лет;*/
 
+            Person[] persArray = new Person[5]; // Вначале объявляем массив объектов
+            persArray[0] = new Person("Ivanov Ivan", "Engineer", "ivivan@mailbox.com", "892312312", 30000, 30); // потом для каждой ячейки массива задаем объект
+            persArray[1] = new Person("Petrov Ivan", "Engineer", "ivivan@mailbox.com", "892312312", 30000, 40);
+            persArray[2] = new Person("Kostomarov Ivan", "Engineer", "ivivan@mailbox.com", "892312312", 30000, 50);
+            persArray[3] = new Person("Jenkins Ivan", "Engineer", "ivivan@mailbox.com", "892312312", 30000, 60);
+            persArray[4] = new Person("Rickman Ivan", "Engineer", "ivivan@mailbox.com", "892312312", 30000, 70);
 
+            int index = 0;
+            foreach (var item in persArray)
+            {
+                if (item.Age > 40)
+                {
+                    persArray[index].info();
+                }
+                index++;
+            }
 
         }
     }
