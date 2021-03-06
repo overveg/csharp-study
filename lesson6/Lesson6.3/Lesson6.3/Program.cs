@@ -10,7 +10,7 @@ namespace Lesson6._3
     {
         [Serializable]
         public class MyArraySizeException : Exception { }
-        
+
         [Serializable]
         public class MyArrayDataException : Exception
         {
@@ -77,13 +77,14 @@ namespace Lesson6._3
                     }
                 }
             }
-            if (details != "") {
+            if (details != "")
+            {
                 throw new MyArrayDataException(details);
             }
-            else {
+            else
+            {
                 Console.WriteLine($"Результат: {result}");
             }
-
         }
     }
 }
