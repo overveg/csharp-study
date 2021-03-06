@@ -14,11 +14,11 @@ namespace Lesson6._3
         [Serializable]
         public class MyArrayDataException : Exception
         {
-            public string Coord { get; }
+            public string Details { get; }
 
-            public MyArrayDataException(string coord)
+            public MyArrayDataException(string details)
             {
-                Coord = coord;
+                Details = details;
             }
         }
 
@@ -32,17 +32,18 @@ namespace Lesson6._3
             -Если в каком-то элементе массива преобразование не удалось
             -(например, в ячейке лежит символ или текст вместо числа), 
             -должно быть брошено исключение MyArrayDataException, 
-            с детализацией в какой именно ячейке лежат неверные данные.
-            В методе main() вызвать полученный метод, 
-            обработать возможные исключения MySizeArrayException и MyArrayDataException,
-            и вывести результат расчета.*/
+            -с детализацией в какой именно ячейке лежат неверные данные.
+            -В методе main() вызвать полученный метод, 
+            -обработать возможные исключения MySizeArrayException и MyArrayDataException,
+            -и вывести результат расчета.*/
 
             string[,] array = { { "1", "2", "3", "4" }, { "1", "2", "3", "4" }, { "1", "2", "3", "4" }, { "1", "2", "3", "4" } };
+            //string[,] array = { { "1", "2", "авп", "4" }, { "1", "кен", "3", "4" }, { "про", "2", "3", "4" }, { "1", "2", "3", "4" } };
             //string[,] array = { { "1", "2", "3" }, { "1", "2", "3" }, { "1", "2", "3" } };
 
             try
             {
-                Method(array);
+                SumArray(array);
             }
             catch (MyArraySizeException)
             {
@@ -50,17 +51,17 @@ namespace Lesson6._3
             }
             catch (MyArrayDataException Ex)
             {
-                Console.WriteLine($"Возникли ошибки: {Ex.Coord}");
+                Console.WriteLine($"Возникли ошибки: {Environment.NewLine} {Ex.Details}");
             }
         }
-        static void Method(string[,] array)
+        static void SumArray(string[,] array)
         {
             if (array.GetLength(0) != 4 || array.GetLength(1) != 4)
             {
                 throw new MyArraySizeException();
             }
             int result = 0;
-            string coord = "";
+            string details = "";
             for (var i = 0; i < array.GetLength(0); i++)
             {
                 for (int j = 0; j < array.GetLength(1); j++)
@@ -68,18 +69,16 @@ namespace Lesson6._3
                     bool isNumber = int.TryParse(array[i, j], out int number);
                     if (!isNumber)
                     {
-                        coord += $" в cтроке: {i + 1}, cтолбце {j + 1}, указано недопустимое зачение: {array[i, j]}; ";
-
+                        details += $" в cтроке: {i + 1}, cтолбце {j + 1}, указано недопустимое зачение: {array[i, j]}{Environment.NewLine} ";
                     }
                     else
                     {
                         result += number;
                     }
-
                 }
             }
-            if (coord !="") {
-                throw new MyArrayDataException(coord);
+            if (details != "") {
+                throw new MyArrayDataException(details);
             }
             else {
                 Console.WriteLine($"Результат: {result}");
