@@ -41,7 +41,7 @@ namespace Lesson6._2
                 ShowTasks();
 
                 //отмечаем выполненные задачи
-                Console.WriteLine("Отметьте выполненные задачи - укажите номер:");
+                Console.WriteLine("Укажите номер выполненной задач:");
                 int userTaskId = Convert.ToInt32(Console.ReadLine());
                 CheckTaskDone(userTaskId);
 

@@ -24,9 +24,5 @@ namespace Lesson6._2
             Title = title;
             IsDone = isDone;
         }
-
-        public void Add(string title) { 
-            
-        }
     }
 }
