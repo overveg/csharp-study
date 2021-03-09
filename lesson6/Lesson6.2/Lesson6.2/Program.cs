@@ -24,9 +24,6 @@ namespace Lesson6._2
     -при вводе пользователем порядкового номера задачи отметить задачу с этим порядковым номером как выполненную;
     -записать актуальный массив задач в файл tasks.json/xml/bin.*/
 
-
-
-
             //проверяем есть ли файл tasks.json
             if (File.Exists(Path.Combine(workDir, filename)))
             {
@@ -53,8 +50,6 @@ namespace Lesson6._2
                 //выводим список задач
                 ShowTasks();
             }
-
-
         }
 
         static ToDo GetNewTask()
