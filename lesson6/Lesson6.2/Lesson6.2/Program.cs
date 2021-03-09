@@ -34,22 +34,44 @@ namespace Lesson6._2
             {
                 Console.WriteLine("В списке нет задач.");
             }
-
-            //добавляем новую задачу
-            string choiceNew = "";
-            do
-            {
-                AddTask(GetNewTask());
-                Console.WriteLine("Добавить еще одну задачу? y/n");
-                choiceNew = Console.ReadLine();
-
-            } while (choiceNew == "y");
-
-            //выводим список задач
-            ShowTasks();
-
-            CheckTasks();
+            //сделать выбор - добавить новую задачу/отметить задачу выполненной
+            MakeChoice();
+            
         }
+
+        static void MakeChoice() {
+
+            Console.WriteLine("Добавить новую задачу - нажмите 1");
+            Console.WriteLine("Отметить задачу выполненной - нажмите 2");
+            int.TryParse(Console.ReadLine(), out int userChoice);
+            switch (userChoice)
+            {
+                case 1:
+                    //добавляем новую задачу
+                    string choiceNew = "";
+                    do
+                    {
+                        AddTask(GetNewTask());
+                        Console.WriteLine("Добавить еще одну задачу? y/n");
+                        choiceNew = Console.ReadLine();
+
+                    } while (choiceNew == "y");
+
+                    //выводим список задач
+                    ShowTasks();
+                    MakeChoice();
+                    break;
+                case 2:
+                    CheckTasks();
+                    MakeChoice();
+                    break;
+                default:
+                    MakeChoice();
+                    break;
+            }
+        }
+
+
         static void CheckTasks()
         {
             string choiceDone = "";
@@ -65,7 +87,6 @@ namespace Lesson6._2
                 if (isNumber && result > 0 && result <= tasksArray.Length)
                 {
                     CheckTaskDone(result-1);
-
                     ShowTasks();
                 }
                 else
@@ -99,6 +120,8 @@ namespace Lesson6._2
             {
                 ToDo[] NewTasks = new ToDo[1];
                 NewTasks[0] = task;
+
+                //сохраняем в файл
                 SaveTasks(NewTasks);
             }
         }
@@ -132,12 +155,7 @@ namespace Lesson6._2
             int index = 1;
             foreach (var item in tasksArray)
             {
-                string IsDoneFlag = "[ ] ";
-                if (item.IsDone)
-                {
-                    IsDoneFlag = "[x] ";
-                };
-                System.Console.WriteLine($"{index} {IsDoneFlag}{item.Title}");
+                System.Console.WriteLine($"{index} {(item.IsDone ? "[x] ":"[ ] ")}{item.Title}");
                 index++;
             }
 
