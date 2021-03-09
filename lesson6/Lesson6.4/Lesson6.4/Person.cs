@@ -30,14 +30,8 @@ namespace Lesson6._4
             Age = age;
         }
 
-        public void info() {
-            Console.WriteLine($"ФИО:{FIO}");
-            Console.WriteLine($"должность:{Position}");
-            Console.WriteLine($"email:{Email}");
-            Console.WriteLine($"телефон:{Tel}");
-            Console.WriteLine($"зарплата:{Salary}");
-            Console.WriteLine($"возраст:{Age}");
-            Console.WriteLine("");
+        public string info() {
+            return $"{FIO} {Position} {Email} {Tel} {Salary} {Age}";
         }
     }
 }
