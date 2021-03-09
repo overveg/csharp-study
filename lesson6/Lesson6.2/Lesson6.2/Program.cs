@@ -30,25 +30,72 @@ namespace Lesson6._2
                 //выводим список задач
                 ShowTasks();
             }
+            else
+            {
+                Console.WriteLine("В списке нет задач.");
+            }
+
             //добавляем новую задачу
-            AddTask(GetNewTask());
+            string choiceNew = "";
+            do
+            {
+                AddTask(GetNewTask());
+                Console.WriteLine("Добавить еще одну задачу? y/n");
+                choiceNew = Console.ReadLine();
 
+            } while (choiceNew == "y");
+           
             //выводим список задач
             ShowTasks();
 
-            //отмечаем выполненные задачи
-            Console.WriteLine("Укажите номер выполненной задачи:");
-            int userTaskId = Convert.ToInt32(Console.ReadLine());
-            CheckTaskDone(userTaskId);
+            string choiceDone = "";
+            do {
+                //отмечаем выполненные задачи
+                Console.WriteLine("Отметьте выполненные задачи. Укажите номер выполненной задачи:");
+                int userTaskId = Convert.ToInt32(Console.ReadLine());
+                CheckTaskDone(userTaskId);
 
-            //выводим список задач
-            ShowTasks();
+                //выводим список задач
+                ShowTasks();
+
+                Console.WriteLine("Указать еще одну задачу выполненной? y/n");
+                choiceDone = Console.ReadLine();
+            }
+            while (choiceDone == "y");
+            
 
         }
 
+        /// <summary>
+        /// Добавляет новый элемент в массив задач
+        /// </summary>
+        static void AddTask(ToDo task)
+        {
+            //проверяем есть ли файл tasks.json
+            if (File.Exists(Path.Combine(workDir, filename)))
+            {
+                //создаем новый массив, куда записываем все старые задачи и новую
+                ToDo[] OldTasks = ReadTasks();
+                ToDo[] NewTasks = new ToDo[OldTasks.Length + 1];
+                Array.Copy(OldTasks, NewTasks, OldTasks.Length);
+
+                NewTasks[OldTasks.Length] = task;
+
+                //сохраняем в файл
+                SaveTasks(NewTasks);
+            }
+            else
+            {
+                ToDo[] NewTasks = new ToDo[1];
+                NewTasks[0] = task;
+                SaveTasks(NewTasks);
+            }
+        }
+
+
         static ToDo GetNewTask()
         {
-            Console.WriteLine("Введите название новой задачи:");
+            Console.WriteLine($"{Environment.NewLine}Введите название новой задачи:");
             return new ToDo(Console.ReadLine(), false);
         }
 
@@ -68,6 +115,7 @@ namespace Lesson6._2
         /// </summary>
         static void ShowTasks()
         {
+            Console.WriteLine($"{Environment.NewLine}Список задач:");
             ToDo[] tasksArray = ReadTasks();
 
             int index = 1;
@@ -110,32 +158,7 @@ namespace Lesson6._2
             File.WriteAllText(filename, json);
         }
 
-        /// <summary>
-        /// Добавляет новый элемент в массив задач
-        /// </summary>
-        static void AddTask(ToDo task)
-        {
-            //проверяем есть ли файл tasks.json
-            if (File.Exists(Path.Combine(workDir, filename)))
-            {
-                //создаем новый массив, куда записываем все старые задачи и новую
-                ToDo[] OldTasks = ReadTasks();
-                ToDo[] NewTasks = new ToDo[OldTasks.Length + 1];
-                Array.Copy(OldTasks, NewTasks, OldTasks.Length);
-               
-                NewTasks[OldTasks.Length] = task;
 
-                //сохраняем в файл
-                SaveTasks(NewTasks);
-            }
-            else
-            {
-                ToDo[] NewTasks = new ToDo[1];
-                NewTasks[0] = task;
-                SaveTasks(NewTasks);
-            }
-
-        }
 
     }
 }
