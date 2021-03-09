@@ -29,27 +29,21 @@ namespace Lesson6._2
             {
                 //выводим список задач
                 ShowTasks();
-
-                //добавляем новую задачу
-                AddTask(GetNewTask());
-
-                //выводим список задач
-                ShowTasks();
-
-                //отмечаем выполненные задачи
-                Console.WriteLine("Укажите номер выполненной задач:");
-                int userTaskId = Convert.ToInt32(Console.ReadLine());
-                CheckTaskDone(userTaskId);
-
-                //выводим список задач
-                ShowTasks();
             }
-            else {
-                //добавляем новую задачу
-                AddTask(GetNewTask());
-                //выводим список задач
-                ShowTasks();
-            }
+            //добавляем новую задачу
+            AddTask(GetNewTask());
+
+            //выводим список задач
+            ShowTasks();
+
+            //отмечаем выполненные задачи
+            Console.WriteLine("Укажите номер выполненной задачи:");
+            int userTaskId = Convert.ToInt32(Console.ReadLine());
+            CheckTaskDone(userTaskId);
+
+            //выводим список задач
+            ShowTasks();
+
         }
 
         static ToDo GetNewTask()
@@ -124,20 +118,18 @@ namespace Lesson6._2
             //проверяем есть ли файл tasks.json
             if (File.Exists(Path.Combine(workDir, filename)))
             {
-                //создаем новый массив из старых задач и новой
+                //создаем новый массив, куда записываем все старые задачи и новую
                 ToDo[] OldTasks = ReadTasks();
                 ToDo[] NewTasks = new ToDo[OldTasks.Length + 1];
+                Array.Copy(OldTasks, NewTasks, OldTasks.Length);
+               
+                NewTasks[OldTasks.Length] = task;
 
-                int index = 0;
-                foreach (var item in OldTasks)
-                {
-                    NewTasks[index] = OldTasks[index];
-                    index++;
-                }
-                NewTasks[index] = task;
+                //сохраняем в файл
                 SaveTasks(NewTasks);
             }
-            else {
+            else
+            {
                 ToDo[] NewTasks = new ToDo[1];
                 NewTasks[0] = task;
                 SaveTasks(NewTasks);
