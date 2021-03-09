@@ -35,7 +35,7 @@ namespace Lesson6._4
             {
                 if (item.Age > 40)
                 {
-                    Console.WriteLine($"{persArray[index].info()}");
+                    Console.WriteLine($"{item.info()}");
                 }
                 index++;
             }

@@ -49,8 +49,6 @@ namespace Lesson6._2
             ShowTasks();
 
             CheckTasks();
-
-
         }
         static void CheckTasks()
         {
@@ -69,16 +67,13 @@ namespace Lesson6._2
                     CheckTaskDone(result-1);
 
                     ShowTasks();
-
-                    Console.WriteLine("Указать еще одну задачу выполненной? y/n");
-                    choiceDone = Console.ReadLine();
                 }
                 else
                 {
                     Console.WriteLine("Не удалось распознать номер задачи.");
-                    Console.WriteLine("Указать еще одну задачу выполненной? y/n");
-                    choiceDone = Console.ReadLine();
                 }
+                Console.WriteLine("Указать еще одну задачу выполненной? y/n");
+                choiceDone = Console.ReadLine();
             }
             while (choiceDone == "y");
         }
