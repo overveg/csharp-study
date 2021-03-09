@@ -44,28 +44,44 @@ namespace Lesson6._2
                 choiceNew = Console.ReadLine();
 
             } while (choiceNew == "y");
-           
+
             //выводим список задач
             ShowTasks();
 
-            string choiceDone = "";
-            do {
-                //отмечаем выполненные задачи
-                Console.WriteLine("Отметьте выполненные задачи. Укажите номер выполненной задачи:");
-                int userTaskId = Convert.ToInt32(Console.ReadLine());
-                CheckTaskDone(userTaskId);
+            CheckTasks();
 
-                //выводим список задач
-                ShowTasks();
-
-                Console.WriteLine("Указать еще одну задачу выполненной? y/n");
-                choiceDone = Console.ReadLine();
-            }
-            while (choiceDone == "y");
-            
 
         }
+        static void CheckTasks()
+        {
+            string choiceDone = "";
+            do
+            {
+                //отмечаем выполненные задачи
+                Console.WriteLine("Отметьте выполненные задачи. Укажите номер выполненной задачи:");
+                string userTaskId = Console.ReadLine();
 
+                ToDo[] tasksArray = ReadTasks();
+
+                bool isNumber = int.TryParse(userTaskId, out int result);
+                if (isNumber && result > 0 && result <= tasksArray.Length)
+                {
+                    CheckTaskDone(result-1);
+
+                    ShowTasks();
+
+                    Console.WriteLine("Указать еще одну задачу выполненной? y/n");
+                    choiceDone = Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine("Не удалось распознать номер задачи.");
+                    Console.WriteLine("Указать еще одну задачу выполненной? y/n");
+                    choiceDone = Console.ReadLine();
+                }
+            }
+            while (choiceDone == "y");
+        }
         /// <summary>
         /// Добавляет новый элемент в массив задач
         /// </summary>
@@ -140,7 +156,7 @@ namespace Lesson6._2
         {
             ToDo[] tasksArray = ReadTasks();
 
-            tasksArray[taskId - 1].IsDone = true;
+            tasksArray[taskId].IsDone = true;
 
             SaveTasks(tasksArray);
         }

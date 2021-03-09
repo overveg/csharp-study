@@ -24,5 +24,6 @@ namespace Lesson6._2
             Title = title;
             IsDone = isDone;
         }
+        
     }
 }
