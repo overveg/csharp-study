@@ -10,40 +10,24 @@ namespace Lesson9
     class Program
     {
         static string result = "";
-        
+
         static void Main(string[] args)
         {
             Console.BackgroundColor = ConsoleColor.Blue;
             Console.Clear();
             Console.WindowWidth = 100;
             Console.WriteLine(Repeat("-", Console.WindowWidth));
+
             Console.Write("> ");
             Console.BackgroundColor = ConsoleColor.Black;
-            string[] userInput = Console.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            string[] userInput = Console.ReadLine().Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
             ReadCommand(userInput);
         }
-        static string Repeat(string s, int n)
-        {
-            return new StringBuilder(s.Length * n)
-                            .AppendJoin(s, new string[n + 1])
-                            .ToString();
-        }
-
-        public static void DisplayValues(string[] arr)
-        {
-            for (int i = arr.GetLowerBound(0); i <= arr.GetUpperBound(0); i++)
-            {
-                result += $"[{i}] : {arr[i]} {Environment.NewLine}";
-                Console.WriteLine($"[{i}] : {arr[i]}");
-            }
-            result += Environment.NewLine;
-            Console.WriteLine();
-        }
+       
 
         static void ReadCommand(string[] userInput)
         {
-           
-            //DisplayValues(userInput);
 
             switch (userInput[0])
             {
@@ -53,25 +37,18 @@ namespace Lesson9
                     break;
                 case "cp":
                     //cp C:\Source D:\Target
-
-
                     string source = userInput[1];
                     string target = userInput[2];
                     bool copySubDirs = true;
                     bool overwrite = true;
 
-
                     //проверяем что копируем - файлы или папки
                     if (Directory.Exists(source))
                     {
-                        //cp d:\Projects\viktoria\test\test3\ d:\Projects\viktoria\test\test4\
-
                         CopyDirectory(source, target, copySubDirs);
-                        //Copy(source, target);
                     }
                     else if (File.Exists(source))
                     {
-                        //cp d:\Projects\viktoria\test\test3\source.css d:\Projects\viktoria\test\test5\target.css
                         CopyFile(source, target, overwrite);
                     }
                     else
@@ -94,7 +71,6 @@ namespace Lesson9
                     break;
             }
         }
-
 
 
         static void ShowCatalog(string dir)
@@ -120,21 +96,17 @@ namespace Lesson9
         private static void CopyDirectory(string sourceDirName, string destDirName, bool copySubDirs)
         {
             //cp d:\Projects\viktoria\test\test3\ d:\Projects\viktoria\test\test7\
-            // Get the subdirectories for the specified directory.
+            // Берем подпапки
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
-            Console.WriteLine(sourceDirName, dir);
 
-
-
-            // If the destination directory doesn't exist, create it. 
+            // Если папка не существует, создаем её
             DirectoryInfo targetDir = new DirectoryInfo(destDirName);
             if (!targetDir.Exists)
             {
                 Directory.CreateDirectory(destDirName);
             }
 
-
-            // Get the files in the directory and copy them to the new location.
+            // Взять файлы и скопировать их в новую папку
             FileInfo[] files = dir.GetFiles();
             foreach (FileInfo file in files)
             {
@@ -180,7 +152,7 @@ namespace Lesson9
 
                 //Copy the file.f
                 fi1.CopyTo(path2);
-                Console.WriteLine($"{path} was copied to {path2}.");
+                Console.WriteLine($"Файл {path} был скопирован в {path2}.");
             }
             catch (IOException ioex)
             {
@@ -219,7 +191,8 @@ namespace Lesson9
         static void ShowInfo(string filepath)
         {
             FileInfo fileInf = new FileInfo(filepath);
-            if (fileInf.Exists) {
+            if (fileInf.Exists)
+            {
                 Console.WriteLine($"Имя: {fileInf.Name} {fileInf.Extension} {fileInf.Length} {fileInf.LastWriteTime}");
             }
         }
@@ -248,34 +221,24 @@ namespace Lesson9
             result += Environment.NewLine;
 
         }
-        //public static void Copy(string sourceDirectory, string targetDirectory)
-        //{
-        //    var diSource = new DirectoryInfo(sourceDirectory);
-        //    var diTarget = new DirectoryInfo(targetDirectory);
 
-        //    CopyAll(diSource, diTarget);
-        //}
+        static string Repeat(string s, int n)
+        {
+            return new StringBuilder(s.Length * n)
+                            .AppendJoin(s, new string[n + 1])
+                            .ToString();
+        }
 
-        //public static void CopyAll(DirectoryInfo source, DirectoryInfo target)
-        //{
-        //    Directory.CreateDirectory(target.FullName);
-
-        //    // Copy each file into the new directory.
-        //    foreach (FileInfo fi in source.GetFiles())
-        //    {
-        //        Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
-        //        fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
-        //    }
-
-        //    // Copy each subdirectory using recursion.
-        //    foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
-        //    {
-        //        DirectoryInfo nextTargetSubDir =
-        //            target.CreateSubdirectory(diSourceSubDir.Name);
-        //        CopyAll(diSourceSubDir, nextTargetSubDir);
-        //    }
-        //}
-
+        public static void DisplayValues(string[] arr)
+        {
+            for (int i = arr.GetLowerBound(0); i <= arr.GetUpperBound(0); i++)
+            {
+                result += $"[{i}] : {arr[i]} {Environment.NewLine}";
+                Console.WriteLine($"[{i}] : {arr[i]}");
+            }
+            result += Environment.NewLine;
+            Console.WriteLine();
+        }
 
     }
 }
